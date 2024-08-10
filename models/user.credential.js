@@ -2,15 +2,10 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const userSchema = new mongoose.Schema({
-    name: {
+const userCredSchema = new mongoose.Schema({
+    userId: {
         type: String,
         required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true
     },
     password: {
         type: String,
@@ -26,8 +21,8 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model('User', userSchema);
+const UserCred = mongoose.model('UserCred', userCredSchema);
 
 module.exports = {
-    User
+    UserCred
 };

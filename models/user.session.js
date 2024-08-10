@@ -2,19 +2,14 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const userSchema = new mongoose.Schema({
-    name: {
+const userSessionSchema = new mongoose.Schema({
+    userId: {
         type: String,
         required: true
     },
-    email: {
+    token: {
         type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
+        required: false
     },
     isDeleted: {
         type: Boolean,
@@ -26,8 +21,8 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model('User', userSchema);
+const UserSession = mongoose.model('UserSession', userSessionSchema);
 
 module.exports = {
-    User
+    UserSession
 };
