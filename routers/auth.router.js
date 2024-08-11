@@ -4,7 +4,12 @@ const router = express.Router();
 
 
 router.post('/register', (req, res) => {
-    res.send('Register route');
+    
+    const { name, email, password } = req.body;
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Password', password);
+    
 });
 
 router.post('/login', (req, res) => {

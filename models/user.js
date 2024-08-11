@@ -24,8 +24,53 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+
+const userSessionSchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    token: {
+        type: String,
+        required: false
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    created_at: {
+        type: Date,
+        default: Date.now()
+    }
+});
+
+const userCredSchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    created_at: {
+        type: Date,
+        default: Date.now()
+    }
+});
+
+const UserCred = mongoose.model('UserCred', userCredSchema);
+
+const UserSession = mongoose.model('UserSession', userSessionSchema);
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = {
-    User
+    User,
+    UserSession,
+    UserCred
 };
