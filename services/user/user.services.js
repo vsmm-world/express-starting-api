@@ -1,4 +1,4 @@
-const { User, UserCred, UserSession } = require("../models/user");
+const { User, UserCred, UserSession } = require("../../models/user");
 
 
 async function registerUser(user) {

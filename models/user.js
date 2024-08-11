@@ -10,9 +10,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    password: {
+    phone: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     isDeleted: {
         type: Boolean,
@@ -31,6 +32,14 @@ const userSessionSchema = new mongoose.Schema({
         required: true
     },
     token: {
+        type: String,
+        required: false
+    },
+    otp: {
+        type: String,
+        required: false
+    },
+    otpRef: {
         type: String,
         required: false
     },
