@@ -1,6 +1,6 @@
 const express = require('express');
 const { authenticateToken } = require('../shared/auth/jwt.authentication');
-const { registerUser } = require('../services/user/user.services');
+const { registerUser, loginUser, logoutUser } = require('../services/user/user.services');
 const router = express.Router();
 
 
@@ -22,8 +22,34 @@ router.post('/register', async (req, res) => {
 
 });
 
-router.post('/login', (req, res) => {
-    res.send('Login route');
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    console.log('Email:', email);
+    console.log('Password:', password);
+
+    const acknowledge = await loginUser({ email, password });
+
+    if (acknowledge) {
+        res.status(200).send('User logged in successfully');
+    } else {
+        res.status(400).send('User login failed');
+    }
+
+});
+
+router.post('/logout', authenticateToken, async (req, res) => {
+
+    const user = req.user;
+    const email = user.email;
+
+    const acknowledge = await logoutUser({ email });
+
+    if (acknowledge) {
+        res.status(200).send('User logged out successfully');
+    } else {
+        res.status(400).send('User logout failed');
+    }
+    
 });
 
 router.get('/', authenticateToken, (req, res) => {
