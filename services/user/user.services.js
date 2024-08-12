@@ -6,10 +6,6 @@ const saltRounds = 10;
 async function registerUser(user) {
 
     const { name, email, password, phone } = user;
-    console.log('Name inside Register function', name);
-    console.log('Email inside Register function', email);
-    console.log('Password inside Register function', password);
-    console.log('Phone inside Register function', phone);
 
     const exist = await User.findOne({ $or: [{ email }, { phone }] });
     if (exist) {
@@ -53,7 +49,7 @@ async function loginUser(user) {
     const mongoUserSession = await newUserSession.save();
 
     if (mongoUserSession) {
-        return true;
+        return token;
     } else {
         return false;
     }
