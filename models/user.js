@@ -43,6 +43,10 @@ const userSessionSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    expiredAt: {
+        type: Date,
+        required: false
+    },
     isDeleted: {
         type: Boolean,
         default: false

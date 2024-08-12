@@ -1,12 +1,14 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const secretKey = process.env.JWT_SECRET_KEY;
+const secretKey = process.env.JWT_SECRET;
 
 // Function to generate a JWT token
 function generateToken(payload, expiresIn) {
 
-    return jwt.sign(payload, secretKey, { expiresIn });
+    console.log('secretKey', secretKey);
+
+    return jwt.sign(payload, secretKey, { expiresIn: expiresIn });
 }
 
 // Middleware function to authenticate JWT token
@@ -22,7 +24,8 @@ function authenticateToken(req, res, next) {
         if (err) {
             return res.sendStatus(403);
         }
-        req.user = user;
+        console.log('User inside authenticateToken', user);
+        req.user = user.mongoUser;
         next();
     });
 }

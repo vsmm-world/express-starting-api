@@ -25,6 +25,7 @@ router.post('/login', async (req, res) => {
     try {
         const token = await loginUser({ email, password });
         if (token) {
+        
             res.status(200).send({
                 token: token,
                 message: 'User logged in successfully'
@@ -41,6 +42,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', authenticateToken, async (req, res) => {
     const user = req.user;
     const email = user.email;
+    console.log('Email inside Logout function', email);
 
     try {
         const acknowledge = await logoutUser({ email });

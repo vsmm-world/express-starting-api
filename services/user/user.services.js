@@ -32,20 +32,19 @@ async function registerUser(user) {
 async function loginUser(user) {
 
     const { email, password } = user;
-    console.log('Email inside Login function', email);
-    console.log('Password inside Login function', password);
 
     const mongoUser = await User.findOne({ email });
-    const mongoUserCred = await User.findOne({ userId: mongoUser._id });
+    const mongoUserCred = await UserCred.findOne({ userId: mongoUser._id });
 
     const match = await bcrypt.compare(password, mongoUserCred.password);
+
     if (!match || !mongoUser || !mongoUserCred) {
         return false;
     }
 
-    const token = generateToken({ mongoUser });
+    const token = generateToken({ mongoUser }, '1h');
 
-    const newUserSession = new UserSession({ userId: mongoUser._id, token });
+    const newUserSession = new UserSession({ userId: mongoUser._id, token, expiredAt: new Date(Date.now() + 1000 * 60 * 60 * 24) });
     const mongoUserSession = await newUserSession.save();
 
     if (mongoUserSession) {
@@ -62,7 +61,6 @@ async function logoutUser(user) {
     console.log('Email inside Logout function', email);
 
     const mongoUser = await User.findOne({ email });
-    const mongoUserSession = await UserSession.findOne({ userId: mongoUser._id });
     const updateSession = await UserSession.updateOne({ userId: mongoUser._id }, { token: null });
 
     if (updateSession) {
