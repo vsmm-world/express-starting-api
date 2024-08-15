@@ -25,12 +25,45 @@ npm start
 
 The server will start running on `http://localhost:3000`.
 
-## API Endpoints
+<!-- ## API Endpoints -->
 
-- `/api/users`: GET - Get all users
-- `/api/users/:id`: GET - Get a specific user by ID
-- `/api/users`: POST - Create a new user
-- `/api/users/:id`: PUT - Update a user by ID
-- `/api/users/:id`: DELETE - Delete a user by ID
+
+
+## Tests
+
+To test the API endpoints, you can use a tool like [Postman](https://www.postman.com/) or [curl](https://curl.se/). Here are some example tests you can perform:
+
+### GET /api/register
+
+- Description: Get all users
+- Request:
+    - Method: GET
+    - URL: `http://localhost:3000/api/register`
+- Response:
+    - Status: 200 OK
+    - Body: Array of user objects
+
+### GET /api/login
+
+- Description: Get a specific user by ID
+- Request:
+    - Method: GET
+    - URL: `http://localhost:3000/api/login/:id`
+        - Replace `:id` with the ID of the user you want to retrieve
+- Response:
+    - Status: 200 OK
+    - Body: User object
+
+### POST /api/logout
+
+- Description: Create a new user
+- Request:
+    - Method: POST
+    - URL: `http://localhost:3000/api/logout`
+    - Body: User object (JSON)
+- Response:
+    - Status: 201 Created
+    - Body: Created user object
+
 
 Feel free to modify and expand upon this starting API to suit your needs.
