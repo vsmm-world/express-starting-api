@@ -1,6 +1,6 @@
 const express = require('express');
 const { authenticateToken } = require('../shared/auth/jwt.authentication');
-const { registerUser, loginUser, logoutUser } = require('../services/user/user.services');
+const { registerUser, loginUser, logoutUser } = require('../services/user/auth.services');
 const { AUTH_RESPONSE_MESSAGE } = require('../constants/message');
 const router = express.Router();
 
